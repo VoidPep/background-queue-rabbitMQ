@@ -7,15 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+builder.WebHost.ConfigureKestrel(serverOptions =>
 {
-    app.MapOpenApi();
-}
-
+    serverOptions.ListenAnyIP(8080);
+});
 builder.Services.AddMassTransit(x =>
 {
     x.UsingRabbitMq((ctx, cfg) =>
@@ -27,6 +22,14 @@ builder.Services.AddMassTransit(x =>
         });
     });
 });
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+}
 
 app.UseHttpsRedirection();
 

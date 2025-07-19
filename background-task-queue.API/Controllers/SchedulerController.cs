@@ -21,4 +21,10 @@ public class SchedulerController : ControllerBase
         await _publishEndpoint.Publish(new Message(valor, DateTime.Now));
         return Accepted();
     }
+
+    [HttpGet]
+    public IActionResult Index()
+    {
+        return Ok("Api esta funcionando");
+    }
 }
