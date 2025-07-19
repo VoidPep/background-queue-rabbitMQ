@@ -1,0 +1,27 @@
+﻿version: '3.8'
+
+services:
+  background-task-queue.api:
+    image: background-task-queue.api
+    build:
+      context: .
+      dockerfile: background-task-queue.API/Dockerfile
+    ports:
+      - "8080:8080"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    hostname: rabbit
+    ports:
+      - "5672:5672"     # Porta de comunicação (RabbitMQ)
+      - "15672:15672"   # Porta do painel web (RabbitMQ Management)
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - rabbitmq_net
+
+networks:
+  rabbitmq_net:
+    driver: bridge
