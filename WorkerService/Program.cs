@@ -17,7 +17,7 @@ builder.Services.AddMassTransit(x =>
             h.Password("guest");
         });
 
-        cfg.ReceiveEndpoint("minha-fila", e =>
+        cfg.ReceiveEndpoint("queue", e =>
         {
             e.ConfigureConsumer<MessageConsumer>(context);
         });

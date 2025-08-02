@@ -2,6 +2,8 @@
 
 services:
   background-task-queue.core:
+    depends_on:
+        - rabbitmq
     image: background-task-queue.core
     build:
       context: .
@@ -10,6 +12,8 @@ services:
       - "8080:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+       - rabbitmq_net
 
   rabbitmq:           
     image: rabbitmq:3-management

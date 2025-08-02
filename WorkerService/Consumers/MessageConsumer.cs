@@ -3,14 +3,14 @@ using MassTransit;
 
 namespace WorkerService.Consumers;
 
-public class MessageConsumer : IConsumer<Message>
+public class MessageConsumer(ILogger logger) : IConsumer<Message>
 {
     public async Task Consume(ConsumeContext<Message> context)
     {
-        Console.WriteLine($"[x] Recebido: {context.Message.Value}");
+        logger.Log(LogLevel.Information, $"[x] Recebido: {context.Message.Value}");
         
-        await Task.Delay(5000);
+        await Task.Delay(10_000);
         
-        Console.WriteLine($"[✔] Finalizado: {context.Message.Value}");
+        logger.Log(LogLevel.Information, $"[\u2714] Finalizado: {context.Message.Value}");
     }
 }

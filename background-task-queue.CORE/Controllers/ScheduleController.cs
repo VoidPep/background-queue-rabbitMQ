@@ -1,3 +1,4 @@
+using background_task_queue.Domain.Contracts;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,12 +8,6 @@ namespace background_task_queue.CORE.Controllers;
 [Route("[controller]")]
 public class ScheduleController : ControllerBase
 {
-    private static readonly string[] Summaries = new[]
-    {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
-
-    private readonly ILogger<ScheduleController> _logger;
     private readonly IPublishEndpoint _publishEndpoint;
 
     public ScheduleController(IPublishEndpoint publishEndpoint)
@@ -21,9 +16,9 @@ public class ScheduleController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromQuery] string valor)
+    public async Task<IActionResult> AddToQueue([FromQuery] string valor)
     {
-        // await _publishEndpoint.Publish(new Message(valor, DateTime.Now));
+        await _publishEndpoint.Publish(new Message(valor, DateTime.Now));
         return Accepted();
     }
 
