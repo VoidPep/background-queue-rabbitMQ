@@ -1,15 +1,17 @@
 ﻿version: '3.8'
 
 services:
-  background-task-queue.api:
-    image: background-task-queue.api
+  background-task-queue.core:
+    image: background-task-queue.core
     build:
       context: .
-      dockerfile: background-task-queue.API/Dockerfile
+      dockerfile: background-task-queue.CORE/Dockerfile
     ports:
       - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
 
-  rabbitmq:
+  rabbitmq:           
     image: rabbitmq:3-management
     container_name: rabbitmq
     hostname: rabbit

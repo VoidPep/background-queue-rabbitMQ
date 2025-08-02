@@ -1,0 +1,6 @@
+@background_task_queue.CORE_HostAddress = http://localhost:5053
+
+GET {{background_task_queue.CORE_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
