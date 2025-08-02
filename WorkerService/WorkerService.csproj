@@ -1,10 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk.Worker">
 
     <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UserSecretsId>dotnet-WorkerService-6d1aab1d-08a0-47e5-860d-eac3ea42b591</UserSecretsId>
+        <AssemblyName>background-task-queue.WorkerService</AssemblyName>
+        <RootNamespace>background-task-queue.WorkerService</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
