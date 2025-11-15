@@ -1,12 +1,16 @@
 ﻿version: '3.8'
 
 services:
-  background-task-queue.core:
+  dotnet:
     depends_on:
         - rabbitmq
-    image: background-task-queue.core
+    image: background-task-queue
+    container_name: background-task-queue
+    tty: true
+    volumes:
+      - ./:/app
     build:
-      context: .
+      context: ./
       dockerfile: background-task-queue.CORE/Dockerfile
     ports:
       - "8080:8080"
