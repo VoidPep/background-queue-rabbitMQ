@@ -1,8 +1,9 @@
 ﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+RUN useradd -m -u 1000 appuser
+USER appuser
 USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
-EXPOSE 8081
 
 ENV ASPNETCORE_ENVIRONMENT=Development
 

@@ -25,7 +25,7 @@ public static class ProgramHelper
 
     public static void SwaggerConfig(WebApplication app)
     {
-        if (!app.Environment.IsDevelopment()) return;
+        // if (!app.Environment.IsDevelopment()) return;
 
         app.UseSwagger();
         app.UseSwaggerUI();
