@@ -6,14 +6,9 @@ namespace background_task_queue.CORE.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ScheduleController : ControllerBase
+public class ScheduleController(IPublishEndpoint publishEndpoint) : ControllerBase
 {
-    private readonly IPublishEndpoint _publishEndpoint;
-
-    public ScheduleController(IPublishEndpoint publishEndpoint)
-    {
-        _publishEndpoint = publishEndpoint;
-    }
+    private readonly IPublishEndpoint _publishEndpoint = publishEndpoint;
 
     [HttpPost]
     public async Task<IActionResult> AddToQueue([FromQuery] string valor)
